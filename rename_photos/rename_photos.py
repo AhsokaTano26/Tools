@@ -12,7 +12,8 @@ def setup_logger():
         handlers=[
             logging.FileHandler("photo_rename.log"),
             logging.StreamHandler()
-        ]
+        ],
+        encoding = "utf-8"
     )
     return logging.getLogger()
 
