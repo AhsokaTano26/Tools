@@ -110,12 +110,13 @@ def rename_and_deduplicate(directory):
                 errors += 1
     
     # 打印摘要
-    logging.info("\n===== 操作摘要 =====")
+    logging.info("\n\n===== 操作摘要 =====")
     logging.info(f"扫描文件总数: {total_files}")
     logging.info(f"重命名文件数: {renamed_count}")
     logging.info(f"删除重复文件数: {duplicates_removed}")
     logging.info(f"错误数: {errors}")
     logging.info(f"最终保留文件数: {total_files - duplicates_removed - errors}")
+    logging.info("\n==================\n")
 
 if __name__ == "__main__":
     logger = setup_logger()
@@ -129,5 +130,9 @@ if __name__ == "__main__":
         exit(1)
     
     logger.info(f"开始处理目录: {args.directory}")
-    rename_and_deduplicate(args.directory)
+    base_dir = args.directory
+    files = [os.path.join(base_dir, file) for file in os.listdir(base_dir)]
+    for file in files:
+        logger.info(f"开始 处理 目录: {file}")
+        rename_and_deduplicate(file)
     logger.info("处理完成")
